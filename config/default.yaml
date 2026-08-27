@@ -1,0 +1,19 @@
+project:
+  name: breast-ultrasound-ai-validation
+  deadline: 2026-10-30
+
+model:
+  name: Parveshiiii/breast-cancer-detector
+  revision: null
+
+data:
+  dataset: BUS-UCLM
+  raw_dir: data/raw
+  manifest: data/dataset_manifest.csv
+
+inference:
+  batch_size: 16
+  device: auto
+
+reproducibility:
+  seed: 42

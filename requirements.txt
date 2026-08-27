@@ -1,0 +1,13 @@
+torch
+transformers
+pandas
+numpy
+scikit-learn
+scipy
+matplotlib
+Pillow
+pyyaml
+tqdm
+pytest
+fastapi
+uvicorn[standard]

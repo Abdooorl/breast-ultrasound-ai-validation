@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local datasets - never commit patient/image data by default
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/README.md
+
+# Generated outputs that may be large
+results/predictions/*.csv
+results/metrics/*.json
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Models / checkpoints
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+models/
