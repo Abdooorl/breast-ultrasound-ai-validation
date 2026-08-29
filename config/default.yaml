@@ -4,7 +4,7 @@ project:
 
 model:
   name: Parveshiiii/breast-cancer-detector
-  revision: null
+  revision: 7c4c1ac11f5f80d382cc641ec6f2d3989e7fa73c
 
 data:
   dataset: BUS-UCLM
