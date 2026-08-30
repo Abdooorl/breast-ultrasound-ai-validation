@@ -1,20 +1,197 @@
 # BUS-UCLM Dataset Audit
 
-## Source
-To be completed after dataset acquisition.
+## 1. Dataset Identity
 
-## Required audit fields
-- Dataset source and licence
-- Number of patients
-- Number of images
-- Class counts: normal / benign / malignant
-- Image dimensions and file formats
-- Patient-to-image mapping
-- Segmentation mask availability
-- Metadata availability (e.g., Doppler / combined images)
-- Missing or corrupted files
-- Duplicate / near-duplicate checks
-- Inclusion and exclusion rules
+**Dataset:** BUS-UCLM — Breast Ultrasound Lesion Segmentation Dataset
+**Canonical repository:** Mendeley Data
+**Dataset DOI:** 10.17632/7fvgj4jsp7.3
+**Associated publication:** Vallez et al., Scientific Data, 2025
+**Publication DOI:** 10.1038/s41597-025-04562-3
+**Dataset licence:** CC BY 4.0
 
-## Reproducibility rule
-Raw clinical/research images must not be committed to this repository by default.
+BUS-UCLM is used as the independent external test dataset in this study.
+
+The raw dataset is stored locally under:
+
+`data/raw/BUS-UCLM/`
+
+Raw dataset files are excluded from version control.
+
+## 2. Dataset Origin
+
+BUS-UCLM contains breast ultrasound images acquired at Ciudad Real General
+University Hospital using a Siemens ACUSON S2000 ultrasound system between
+2022 and 2023.
+
+The dataset contains images from 38 anonymized patients.
+
+Each patient is represented by a random four-letter identifier in the image
+filename. For example:
+
+`ALWI_000.png`
+
+where `ALWI` identifies the patient and `000` identifies an image from that
+patient's study.
+
+## 3. Dataset Structure
+
+The downloaded dataset contains:
+
+- `INFO.csv` — image-level metadata
+- `images/` — ultrasound PNG images
+- `masks/` — corresponding segmentation masks
+
+Audit results:
+
+- Metadata rows: 683
+- Ultrasound images: 683
+- Segmentation masks: 683
+- Unique patients: 38
+- Missing images: 0
+- Missing masks: 0
+- Corrupt images: 0
+- Corrupt masks: 0
+- Exact duplicate ultrasound files: 0
+
+## 4. Diagnostic Class Distribution
+
+The dataset contains three image-level diagnostic classes:
+
+- Normal: 419
+- Benign: 174
+- Malignant: 90
+- Total: 683
+
+The dataset is class-imbalanced, with malignant images representing the
+smallest class.
+
+This imbalance motivates the use of class-specific metrics and balanced
+metrics rather than relying on overall accuracy alone.
+
+## 5. Metadata
+
+`INFO.csv` provides the following fields:
+
+- Image
+- Resolution
+- Label
+- Doppler
+- Marks
+- Combined
+
+Observed metadata counts:
+
+### Doppler
+
+- No: 646
+- Yes: 37
+
+One source metadata value was encoded as `Y` rather than `Yes`.
+The original `INFO.csv` is preserved unchanged, while the derived manifest
+normalizes `Y` to `Yes`.
+
+### Visual Marks
+
+- No: 529
+- Yes: 154
+
+### Combined Images
+
+- No: 677
+- Yes: 6
+
+## 6. Segmentation Masks
+
+Every ultrasound image has a corresponding segmentation mask.
+
+Audit results:
+
+- Empty masks: 419
+- Non-empty masks: 264
+
+All 419 normal images have empty masks.
+
+All 174 benign and 90 malignant images have non-empty lesion masks.
+
+Segmentation masks are not used as classifier inputs in the primary external
+testing experiment.
+
+They are retained for potential secondary explainability or localization
+analysis.
+
+## 7. Image Characteristics
+
+Direct inspection of the PNG files identified:
+
+- 670 images stored as RGB at 856 × 606 pixels
+- 13 images stored as RGBA with differing dimensions
+
+All 13 RGBA/dimension-mismatched images belong to patient `HESN`.
+
+Although `INFO.csv` reports a resolution of 856 × 606 for all images, these
+13 files have different actual dimensions.
+
+No files were corrupt.
+
+All 683 images can be converted to RGB and successfully processed into the
+pretrained model's expected tensor shape:
+
+`(1, 3, 224, 224)`
+
+The raw files are not altered during this conversion.
+
+## 8. Image/Mask Dimension Mismatch
+
+The 13 HESN ultrasound images have dimensions different from their
+corresponding 856 × 606 masks.
+
+This does not affect the primary classification experiment because
+segmentation masks are not model inputs.
+
+These cases must be treated carefully if mask-based explainability or
+localization analysis is performed later.
+
+## 9. Clean-Input Sensitivity Subset
+
+The primary external evaluation will use all 683 BUS-UCLM images.
+
+A prespecified secondary sensitivity analysis defines a clean-input subset as
+images satisfying all of the following:
+
+- no Doppler information
+- no visible marks
+- not a combined image
+
+The resulting clean-input subset contains:
+
+**521 images**
+
+This subset will not replace the primary analysis and will not be used to
+select cases based on model performance.
+
+## 10. Derived Dataset Manifest
+
+The reproducible dataset audit generates:
+
+`data/dataset_manifest.csv`
+
+The manifest contains one row per ultrasound image and records:
+
+- image filename
+- anonymized patient identifier
+- diagnostic label
+- image and mask paths
+- Doppler status
+- visual-mark status
+- combined-image status
+- actual image dimensions
+- image mode
+- mask characteristics
+- clean-input status
+- SHA-256 image hash
+
+The manifest is generated by:
+
+`scripts/audit_dataset.py`
+
+The raw BUS-UCLM dataset remains unchanged.
