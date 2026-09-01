@@ -1,0 +1,164 @@
+{
+  "primary_full_dataset": {
+    "subset": "full_bus_uclm",
+    "multiclass": {
+      "n_images": 683,
+      "accuracy": 0.4582723279648609,
+      "balanced_accuracy": 0.5338088314633455,
+      "macro_precision": 0.5743446794429908,
+      "macro_recall": 0.5338088314633455,
+      "macro_f1": 0.4544047902845056,
+      "malignant_sensitivity": 0.43333333333333335,
+      "confusion_matrix": [
+        [
+          153,
+          16,
+          5
+        ],
+        [
+          48,
+          39,
+          3
+        ],
+        [
+          268,
+          30,
+          121
+        ]
+      ],
+      "class_order": [
+        "benign",
+        "malignant",
+        "normal"
+      ],
+      "per_class": {
+        "benign": {
+          "precision": 0.326226012793177,
+          "recall": 0.8793103448275862,
+          "f1": 0.4758942457231726,
+          "support": 174
+        },
+        "malignant": {
+          "precision": 0.4588235294117647,
+          "recall": 0.43333333333333335,
+          "f1": 0.44571428571428573,
+          "support": 90
+        },
+        "normal": {
+          "precision": 0.937984496124031,
+          "recall": 0.28878281622911695,
+          "f1": 0.4416058394160584,
+          "support": 419
+        }
+      }
+    },
+    "malignant_vs_non_malignant": {
+      "n_images": 683,
+      "positive_class": "malignant",
+      "negative_class": "non-malignant",
+      "tp": 39,
+      "tn": 547,
+      "fp": 46,
+      "fn": 51,
+      "sensitivity": 0.43333333333333335,
+      "specificity": 0.9224283305227656,
+      "ppv": 0.4588235294117647,
+      "npv": 0.9147157190635451,
+      "f1": 0.44571428571428573,
+      "balanced_accuracy": 0.6778808319280495,
+      "roc_auc": 0.7854787333708075,
+      "pr_auc": 0.4618853334237787,
+      "binary_confusion_matrix": [
+        [
+          547,
+          46
+        ],
+        [
+          51,
+          39
+        ]
+      ]
+    }
+  },
+  "secondary_clean_input": {
+    "subset": "clean_input",
+    "multiclass": {
+      "n_images": 521,
+      "accuracy": 0.39731285988483683,
+      "balanced_accuracy": 0.5257609094242758,
+      "macro_precision": 0.48536416184971093,
+      "macro_recall": 0.5257609094242758,
+      "macro_f1": 0.3734282826737461,
+      "malignant_sensitivity": 0.3888888888888889,
+      "confusion_matrix": [
+        [
+          72,
+          6,
+          3
+        ],
+        [
+          21,
+          14,
+          1
+        ],
+        [
+          253,
+          30,
+          121
+        ]
+      ],
+      "class_order": [
+        "benign",
+        "malignant",
+        "normal"
+      ],
+      "per_class": {
+        "benign": {
+          "precision": 0.20809248554913296,
+          "recall": 0.8888888888888888,
+          "f1": 0.3372365339578454,
+          "support": 81
+        },
+        "malignant": {
+          "precision": 0.28,
+          "recall": 0.3888888888888889,
+          "f1": 0.32558139534883723,
+          "support": 36
+        },
+        "normal": {
+          "precision": 0.968,
+          "recall": 0.2995049504950495,
+          "f1": 0.45746691871455575,
+          "support": 404
+        }
+      }
+    },
+    "malignant_vs_non_malignant": {
+      "n_images": 521,
+      "positive_class": "malignant",
+      "negative_class": "non-malignant",
+      "tp": 14,
+      "tn": 449,
+      "fp": 36,
+      "fn": 22,
+      "sensitivity": 0.3888888888888889,
+      "specificity": 0.9257731958762887,
+      "ppv": 0.28,
+      "npv": 0.9532908704883227,
+      "f1": 0.32558139534883723,
+      "balanced_accuracy": 0.6573310423825888,
+      "roc_auc": 0.8017754868270333,
+      "pr_auc": 0.28275656076701094,
+      "binary_confusion_matrix": [
+        [
+          449,
+          36
+        ],
+        [
+          22,
+          14
+        ]
+      ]
+    }
+  }
+}
