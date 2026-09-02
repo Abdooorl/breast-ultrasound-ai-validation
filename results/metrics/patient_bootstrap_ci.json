@@ -1,0 +1,107 @@
+{
+  "method": "patient-cluster percentile bootstrap",
+  "bootstrap_unit": "patient_id",
+  "confidence_level": 0.95,
+  "n_bootstrap_requested": 5000,
+  "n_bootstrap_valid": 5000,
+  "seed": 42,
+  "n_patients": 38,
+  "metrics": {
+    "accuracy": {
+      "estimate": 0.4582723279648609,
+      "ci_95": {
+        "lower": 0.37557449257603814,
+        "upper": 0.5346565259308002,
+        "n_valid": 5000
+      }
+    },
+    "balanced_accuracy_3class": {
+      "estimate": 0.5338088314633455,
+      "ci_95": {
+        "lower": 0.4564275868477359,
+        "upper": 0.6072898194016991,
+        "n_valid": 5000
+      }
+    },
+    "macro_f1": {
+      "estimate": 0.4544047902845056,
+      "ci_95": {
+        "lower": 0.3608149115963227,
+        "upper": 0.5346285073464944,
+        "n_valid": 5000
+      }
+    },
+    "malignant_sensitivity": {
+      "estimate": 0.43333333333333335,
+      "ci_95": {
+        "lower": 0.24174876847290644,
+        "upper": 0.6136402821316614,
+        "n_valid": 5000
+      }
+    },
+    "binary_sensitivity": {
+      "estimate": 0.43333333333333335,
+      "ci_95": {
+        "lower": 0.24174876847290644,
+        "upper": 0.6136402821316614,
+        "n_valid": 5000
+      }
+    },
+    "binary_specificity": {
+      "estimate": 0.9224283305227656,
+      "ci_95": {
+        "lower": 0.8787864654002714,
+        "upper": 0.9584045333901399,
+        "n_valid": 5000
+      }
+    },
+    "binary_ppv": {
+      "estimate": 0.4588235294117647,
+      "ci_95": {
+        "lower": 0.2222222222222222,
+        "upper": 0.6863194819212082,
+        "n_valid": 5000
+      }
+    },
+    "binary_npv": {
+      "estimate": 0.9147157190635451,
+      "ci_95": {
+        "lower": 0.8574141880009175,
+        "upper": 0.9589457842964668,
+        "n_valid": 5000
+      }
+    },
+    "binary_f1": {
+      "estimate": 0.44571428571428573,
+      "ci_95": {
+        "lower": 0.24459385979588427,
+        "upper": 0.6113548430888974,
+        "n_valid": 5000
+      }
+    },
+    "binary_balanced_accuracy": {
+      "estimate": 0.6778808319280495,
+      "ci_95": {
+        "lower": 0.577601063250763,
+        "upper": 0.7740244690011481,
+        "n_valid": 5000
+      }
+    },
+    "roc_auc": {
+      "estimate": 0.7854787333708075,
+      "ci_95": {
+        "lower": 0.7060014493154355,
+        "upper": 0.8645074750293362,
+        "n_valid": 5000
+      }
+    },
+    "pr_auc": {
+      "estimate": 0.4618853334237787,
+      "ci_95": {
+        "lower": 0.2500412936721121,
+        "upper": 0.6487042850008949,
+        "n_valid": 5000
+      }
+    }
+  }
+}
