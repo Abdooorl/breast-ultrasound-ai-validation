@@ -1,0 +1,6 @@
+| Measure         |   Count |
+|:----------------|--------:|
+| True positives  |      39 |
+| True negatives  |     547 |
+| False positives |      46 |
+| False negatives |      51 |

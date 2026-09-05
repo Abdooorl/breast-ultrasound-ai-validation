@@ -12,3 +12,4 @@ tqdm
 pytest
 fastapi
 uvicorn[standard]
+tabulate

@@ -1,0 +1,7 @@
+Metric,Estimate,95% patient-bootstrap CI
+Accuracy,0.458,0.376–0.535
+Balanced accuracy,0.534,0.456–0.607
+Macro precision,0.574,—
+Macro recall,0.534,—
+Macro F1,0.454,0.361–0.535
+Malignant sensitivity,0.433,0.242–0.614

@@ -1,0 +1,9 @@
+Metric,Estimate,95% patient-bootstrap CI
+Sensitivity,0.433,0.242–0.614
+Specificity,0.922,0.879–0.958
+PPV,0.459,0.222–0.686
+NPV,0.915,0.857–0.959
+F1,0.446,0.245–0.611
+Balanced accuracy,0.678,0.578–0.774
+ROC-AUC,0.785,0.706–0.865
+PR-AUC,0.462,0.250–0.649

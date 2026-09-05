@@ -1,0 +1,11 @@
+| Metric                    |   Estimate |
+|:--------------------------|-----------:|
+| Images                    |    521     |
+| Patients                  |     37     |
+| 3-class accuracy          |      0.397 |
+| 3-class balanced accuracy |      0.526 |
+| Macro F1                  |      0.373 |
+| Malignant sensitivity     |      0.389 |
+| Specificity               |      0.926 |
+| ROC-AUC                   |      0.802 |
+| PR-AUC                    |      0.283 |
