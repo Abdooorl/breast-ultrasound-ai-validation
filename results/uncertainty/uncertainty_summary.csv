@@ -1,0 +1,6 @@
+Group,N,Confidence mean,Confidence median,Confidence Q1,Confidence Q3,Margin mean,Margin median,Margin Q1,Margin Q3
+all_images,683,0.7961,0.8313,0.6768,0.9307,0.634,0.7009,0.4216,0.8832
+correct_predictions,313,0.825,0.8808,0.7217,0.962,0.6802,0.7914,0.48,0.9346
+incorrect_predictions,370,0.7717,0.7998,0.6604,0.8976,0.5949,0.6518,0.3911,0.8317
+malignant_true_positives,39,0.8981,0.9304,0.8905,0.9561,0.8127,0.8755,0.8032,0.9288
+malignant_false_negatives,51,0.8038,0.8149,0.7125,0.9123,0.6473,0.6676,0.5031,0.849
