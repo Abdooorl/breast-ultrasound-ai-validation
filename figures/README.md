@@ -14,3 +14,7 @@ Ground-truth distribution of benign, malignant and normal images in the full 683
 
 ## Figure 5 — Study Workflow
 Overview of the external validation workflow: frozen public model reproduction, BUS-UCLM inference, baseline performance evaluation and subsequent reliability analysis. The model is evaluated without retraining or fine-tuning.
+
+### Figure 6 — Risk–coverage curve
+
+Confidence-ranked selective-classification performance on the frozen BUS-UCLM external test set. Coverage represents the proportion of cases retained for prediction, while selective risk is defined as one minus accepted-case accuracy. Lower coverage preferentially retains higher-confidence cases. The curve is descriptive and is not used to select a preferred operating threshold.
