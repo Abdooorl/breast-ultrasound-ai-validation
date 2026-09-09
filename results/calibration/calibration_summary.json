@@ -1,0 +1,10 @@
+{
+  "n_images": 683,
+  "n_bins": 10,
+  "binning": "equal-width",
+  "overall_accuracy": 0.4582723279648609,
+  "mean_confidence": 0.796135292220779,
+  "confidence_minus_accuracy": 0.33786296425591805,
+  "ece": 0.33862805279247243,
+  "multiclass_brier_score": 0.8080225644790108
+}

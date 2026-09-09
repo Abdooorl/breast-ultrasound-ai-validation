@@ -18,3 +18,7 @@ Overview of the external validation workflow: frozen public model reproduction, 
 ### Figure 6 — Risk–coverage curve
 
 Confidence-ranked selective-classification performance on the frozen BUS-UCLM external test set. Coverage represents the proportion of cases retained for prediction, while selective risk is defined as one minus accepted-case accuracy. Lower coverage preferentially retains higher-confidence cases. The curve is descriptive and is not used to select a preferred operating threshold.
+
+### Figure 7 — Reliability diagram
+
+Calibration of maximum softmax confidence against empirical classification accuracy on the frozen BUS-UCLM external test set. The dashed diagonal represents perfect calibration. The model shows substantial overconfidence, with mean confidence exceeding observed accuracy across most populated confidence bins. Softmax confidence is therefore treated as a model-confidence score rather than a calibrated clinical probability.
