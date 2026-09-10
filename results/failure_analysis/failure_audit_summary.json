@@ -1,0 +1,55 @@
+{
+  "n_images": 683,
+  "n_patients": 38,
+  "binary_malignant_counts": {
+    "tp": 39,
+    "fn": 51,
+    "fp": 46,
+    "tn": 547
+  },
+  "false_negative_numeric": {
+    "n": 51,
+    "confidence_mean": 0.8037638746055902,
+    "confidence_median": 0.8149157762527466,
+    "confidence_q25": 0.712502509355545,
+    "confidence_q75": 0.9123325943946838,
+    "margin_mean": 0.6473326643052346,
+    "margin_median": 0.6675611287355423,
+    "prob_malignant_mean": 0.11921471017686756,
+    "prob_malignant_median": 0.0770270973443985
+  },
+  "false_negative_metadata": {
+    "n": 51,
+    "doppler_count": 9,
+    "doppler_rate": 0.17647058823529413,
+    "marks_count": 29,
+    "marks_rate": 0.5686274509803921,
+    "combined_count": 0,
+    "combined_rate": 0.0,
+    "clean_input_count": 22,
+    "clean_input_rate": 0.43137254901960786
+  },
+  "false_positive_numeric": {
+    "n": 46,
+    "confidence_mean": 0.750965992393701,
+    "confidence_median": 0.7752808332443237,
+    "confidence_q25": 0.6038981825113297,
+    "confidence_q75": 0.9084793031215668,
+    "margin_mean": 0.5396639069785243,
+    "margin_median": 0.585577204823494,
+    "prob_malignant_mean": 0.750965992393701,
+    "prob_malignant_median": 0.7752808332443237
+  },
+  "false_positive_metadata": {
+    "n": 46,
+    "doppler_count": 3,
+    "doppler_rate": 0.06521739130434782,
+    "marks_count": 10,
+    "marks_rate": 0.21739130434782608,
+    "combined_count": 0,
+    "combined_rate": 0.0,
+    "clean_input_count": 36,
+    "clean_input_rate": 0.782608695652174
+  },
+  "note": "This audit is descriptive. Metadata associations are not interpreted as causal."
+}
