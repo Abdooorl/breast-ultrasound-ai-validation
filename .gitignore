@@ -42,3 +42,6 @@ results/metrics/*.json
 *.ckpt
 *.safetensors
 models/
+
+# Additional local virtual environments
+.venv-*/

@@ -13,3 +13,5 @@ pytest
 fastapi
 uvicorn[standard]
 tabulate
+
+python-multipart
