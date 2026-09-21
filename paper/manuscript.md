@@ -1,8 +1,8 @@
 # Does a Public Breast Ultrasound AI Model Generalize? External Testing and Uncertainty-Aware Abstention of a Pretrained Vision Transformer
 
-**Manuscript type:** Original Research / External Testing Study  
-**Authors:** [TO COMPLETE]  
-**Affiliations:** [TO COMPLETE]  
+**Manuscript type:** Original Research / External Testing Study
+**Authors:** [TO COMPLETE]
+**Affiliations:** [TO COMPLETE]
 **Corresponding author:** [TO COMPLETE]
 ## Abstract
 
