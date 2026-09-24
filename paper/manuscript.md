@@ -16,7 +16,7 @@ The frozen three-class classifier was evaluated on 683 BUS-UCLM images from 38 p
 Malignant sensitivity was 0.4333 (95% CI 0.2417-0.6136), despite a malignant-score ROC-AUC of 0.7855 (95% CI 0.7060-0.8645). Of 51 malignant false negatives, 48 (94.1%) were classified as benign and 27 (52.9%) had maximum-softmax confidence of at least 0.80. Expected Calibration Error was 0.3386. Raising the acceptance threshold reduced accepted-case error but sharply reduced coverage; at a threshold of 0.90, coverage was 0.3397 and 16 malignant false negatives remained accepted.
 
 ### Conclusion
-The frozen classifier showed limited external performance on BUS-UCLM, with low malignant sensitivity, substantial overconfidence, and high-confidence malignant-to-benign errors. Confidence-based abstention did not provide a reliable safety boundary because meaningful risk reduction required substantial loss of coverage and high-confidence malignant misses persisted.
+The frozen classifier showed limited external performance on BUS-UCLM, with low malignant sensitivity, substantial overconfidence, and high-confidence malignant-to-benign errors. Confidence-based abstention did not provide a reliable safety boundary on this external cohort because meaningful risk reduction required substantial loss of coverage and high-confidence malignant misses persisted.
 
 **Keywords:** breast ultrasound; artificial intelligence; external testing; Vision Transformer; calibration; uncertainty; selective classification
 # 1. Introduction and Related Work
@@ -209,7 +209,7 @@ The continuous risk-coverage analysis showed that predictions ranked by maximum-
 
 At approximately 25% coverage, 171 images were accepted and accuracy was 0.7135, corresponding to a selective risk of 0.2865. At approximately 50% coverage, 342 images were accepted and accuracy was 0.5380, with risk 0.4620. At approximately 75% coverage, 512 images were accepted and accuracy was 0.4883, with risk 0.5117. At full coverage, accuracy was 0.4583 and risk was 0.5417.
 
-The descriptive area under the empirical risk-coverage curve was 0.3831. The curve therefore showed that confidence ranking could identify a lower-risk subset, but meaningful reductions in accepted-case risk required substantial reductions in coverage (Figure 6).
+The descriptive area under the empirical risk-coverage curve was 0.3831. The curve therefore showed that confidence ranking could identify a lower-risk subset, but meaningful reductions in accepted-case risk required substantial reductions in coverage (Figure 5).
 
 ## 3.9 Calibration
 
@@ -219,7 +219,7 @@ Using 10 equal-width confidence bins, Expected Calibration Error was 0.3386. The
 
 The largest reliability gaps occurred in the high-confidence bins. For predictions with confidence between 0.80 and 0.90, mean confidence was 0.8531 while empirical accuracy was 0.3791. For predictions with confidence between 0.90 and 1.00, mean confidence was 0.9479 while empirical accuracy was 0.6121.
 
-These results indicate substantial overconfidence under external testing. Confidence could still rank predictions by relative reliability while remaining poorly calibrated in absolute terms (Figure 5).
+These results indicate substantial overconfidence under external testing. Confidence could still rank predictions by relative reliability while remaining poorly calibrated in absolute terms (Figure 6).
 
 ## 3.10 Failure analysis
 
@@ -391,6 +391,22 @@ These findings support external, patient-aware evaluation that examines calibrat
 | FP from five highest-count patients | 29 | 63.0% |
 
 *Note:* Confidence refers to maximum-softmax confidence for the model's predicted class. Percentages for confidence thresholds and prediction directions are relative to the corresponding false-negative or false-positive group. Patient concentration is descriptive and does not establish a causal failure mechanism.
+
+# Figure Legends
+
+**Figure 1. Study workflow for frozen external evaluation of the pretrained breast-ultrasound Vision Transformer.** The publicly released classifier was applied to BUS-UCLM without retraining, fine-tuning, recalibration, or other adaptation. Predictions were evaluated for three-class performance, malignant-versus-non-malignant discrimination, patient-clustered uncertainty, confidence and calibration, selective classification, risk–coverage behavior, and failure patterns.
+
+**Figure 2. Three-class confusion matrix for external BUS-UCLM evaluation.** Rows represent the BUS-UCLM reference class and columns represent model predictions. Among 90 malignant images, 48 were classified as benign, 39 as malignant, and 3 as normal. Malignant-to-benign classification was therefore the dominant malignant error direction.
+
+**Figure 3. Receiver operating characteristic curve for malignant-versus-non-malignant discrimination.** The malignant softmax score was used as the continuous decision variable. ROC-AUC was 0.7855, with a patient-cluster bootstrap 95% confidence interval of 0.7060–0.8645. The curve represents ranking performance and should be interpreted separately from malignant sensitivity under the model's frozen hard-class decision rule.
+
+**Figure 4. Precision–recall curve for malignant-versus-non-malignant discrimination.** The malignant softmax score was used as the continuous decision variable. PR-AUC was 0.4619, with a patient-cluster bootstrap 95% confidence interval of 0.2500–0.6487.
+
+**Figure 5. Risk–coverage relationship under confidence-based selective classification.** Predictions were ranked by maximum-softmax confidence and progressively lower-confidence predictions were excluded. Selective risk decreased as coverage decreased, indicating that confidence retained useful relative ranking information. However, substantial reductions in accepted-case risk required substantial reductions in coverage. The empirical area under the risk–coverage curve was 0.3831 and is reported descriptively.
+
+**Figure 6. Reliability of maximum-softmax confidence during external testing.** Mean maximum-softmax confidence was compared with empirical top-class accuracy across 10 equal-width confidence bins. Perfect calibration is represented by the identity line. Expected Calibration Error was 0.3386 and the multiclass Brier score was 0.8080. Maximum-softmax confidence substantially overestimated observed correctness on the external dataset.
+
+**Supplementary Figure S1. BUS-UCLM class distribution in the full external test cohort.** The primary analysis included 683 images from 38 patients: 419 normal, 174 benign, and 90 malignant images.
 
 # Declarations
 
