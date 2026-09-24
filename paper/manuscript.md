@@ -58,7 +58,7 @@ Taken together, previous work supports the need for external, patient-aware, rel
 
 This study was designed as an independent external testing study of a publicly available breast-ultrasound image classifier. The objective was to evaluate whether a pretrained Vision Transformer (ViT), released through Hugging Face, generalized to an independently acquired breast-ultrasound dataset without retraining, fine-tuning, calibration fitting, or other model adaptation on the external data. A secondary objective was to characterize model uncertainty, calibration, selective-classification behavior, and clinically relevant error patterns, with particular emphasis on malignant false-negative predictions.
 
-The analysis plan was prespecified in Research Protocol v1.0 and frozen before complete external inference on BUS-UCLM. The protocol defined the primary outcome, dataset inclusion rules, external-testing sequence, patient-cluster bootstrap procedure, uncertainty measures, abstention thresholds, calibration analysis, failure-analysis priorities, and the distinction between core and optional analyses. Methodological changes after protocol freeze were required to remain traceable and to be identified as post hoc where applicable. The study was conducted as a research benchmark and was not intended to evaluate the model as a standalone clinical diagnostic device. Reporting was guided by principles from the Checklist for Artificial Intelligence in Medical Imaging (CLAIM) 2024 Update.
+The analysis plan was prespecified in Research Protocol v1.0 and frozen before complete external inference on BUS-UCLM. The protocol defined the primary outcome, dataset inclusion rules, external-testing sequence, patient-cluster bootstrap procedure, uncertainty measures, abstention thresholds, calibration analysis, failure-analysis priorities, and the distinction between core and optional analyses. Methodological changes after protocol freeze were required to remain traceable and to be identified as post hoc where applicable. The study was conducted as a research benchmark and was not intended to evaluate the model as a standalone clinical diagnostic device. Reporting was guided by principles from the Checklist for Artificial Intelligence in Medical Imaging (CLAIM) 2024 Update. The overall external-testing workflow is summarized in Figure 1.
 
 No new patient recruitment or prospective data collection was performed. The study used an openly released, previously collected breast-ultrasound dataset and a publicly released pretrained model.
 
@@ -76,7 +76,7 @@ External testing was performed on BUS-UCLM, a publicly released breast-ultrasoun
 
 The image was the prediction unit because the model produces one classification per image. However, because multiple images may originate from the same patient, observations were not assumed to be statistically independent for uncertainty estimation. Patient identifiers supplied by the dataset were therefore retained in the analysis manifest and used for patient-clustered bootstrap confidence intervals.
 
-The official BUS-UCLM class labels were used as the reference standard without modification based on model output. For the binary malignancy analysis, malignant images were coded as positive and normal plus benign images were combined into a non-malignant negative class.
+The official BUS-UCLM class labels were used as the reference standard without modification based on model output. For the binary malignancy analysis, malignant images were coded as positive and normal plus benign images were combined into a non-malignant negative class. Key model and external-cohort characteristics are summarized in Table 1.
 
 ## 2.4 Dataset audit, eligibility, and sensitivity subset
 
@@ -143,7 +143,7 @@ Optional ViT attribution or lesion-mask overlap analysis was prespecified as exp
 
 ## 3.1 External test cohort
 
-The complete eligible BUS-UCLM cohort comprised 683 breast-ultrasound images from 38 patients. The reference-standard class distribution was 419 normal images, 174 benign images, and 90 malignant images. All 683 images were retained for the primary external analysis. A prespecified clean-input sensitivity subset, excluding images flagged as containing visual marks/annotations, Doppler information, or combined/multi-panel content, contained 521 images.
+The complete eligible BUS-UCLM cohort comprised 683 breast-ultrasound images from 38 patients. The reference-standard class distribution was 419 normal images, 174 benign images, and 90 malignant images (Supplementary Figure S1). All 683 images were retained for the primary external analysis. A prespecified clean-input sensitivity subset, excluding images flagged as containing visual marks/annotations, Doppler information, or combined/multi-panel content, contained 521 images.
 
 The frozen inference output contained one prediction per image with no missing predictions, duplicate image rows, or class-probability inconsistencies. All analyses reported below were performed from the same frozen prediction table.
 
@@ -153,13 +153,13 @@ Across the full 683-image external test set, overall three-class accuracy was 0.
 
 Class-specific performance differed substantially. For benign images, precision was 0.3262, recall was 0.8793, and F1 score was 0.4759. For malignant images, precision was 0.4588, recall was 0.4333, and F1 score was 0.4457. For normal images, precision was 0.9380, recall was 0.2888, and F1 score was 0.4416.
 
-The three-class confusion matrix, ordered as benign, malignant, and normal, was: reference benign, 153 benign, 16 malignant, and 5 normal; reference malignant, 48 benign, 39 malignant, and 3 normal; reference normal, 268 benign, 30 malignant, and 121 normal. Thus, the dominant error for malignant images was assignment to the benign class, while many normal images were also assigned to benign.
+The three-class confusion matrix, ordered as benign, malignant, and normal, was: reference benign, 153 benign, 16 malignant, and 5 normal; reference malignant, 48 benign, 39 malignant, and 3 normal; reference normal, 268 benign, 30 malignant, and 121 normal. Thus, the dominant error for malignant images was assignment to the benign class, while many normal images were also assigned to benign (Figure 2).
 
 ## 3.3 Malignant versus non-malignant discrimination
 
 For the prespecified binary analysis, benign and normal images were combined into a non-malignant class. The resulting confusion counts were 39 true positives, 547 true negatives, 46 false positives, and 51 false negatives.
 
-Malignant sensitivity, the primary endpoint, was 0.4333. Specificity was 0.9224, positive predictive value was 0.4588, negative predictive value was 0.9147, F1 score was 0.4457, and balanced accuracy was 0.6779. Using the malignant softmax score as the continuous decision variable, ROC-AUC was 0.7855 and PR-AUC was 0.4619.
+Malignant sensitivity, the primary endpoint, was 0.4333. Specificity was 0.9224, positive predictive value was 0.4588, negative predictive value was 0.9147, F1 score was 0.4457, and balanced accuracy was 0.6779. Using the malignant softmax score as the continuous decision variable, ROC-AUC was 0.7855 and PR-AUC was 0.4619 (Figures 3 and 4).
 
 These results show that ranking performance was stronger than the sensitivity achieved by the model's default hard three-class decision rule. However, more than half of the malignant images were not assigned to the malignant class.
 
@@ -169,7 +169,7 @@ Patient-cluster bootstrap confidence intervals were calculated using 5,000 repli
 
 For the full external cohort, the 95% confidence interval for overall three-class accuracy was 0.3756 to 0.5347. The corresponding intervals were 0.4564 to 0.6073 for three-class balanced accuracy and 0.3608 to 0.5346 for macro F1 score.
 
-For malignant detection, sensitivity was 0.4333 with a 95% confidence interval of 0.2417 to 0.6136. Specificity was 0.9224 (95% CI 0.8788–0.9584), positive predictive value was 0.4588 (95% CI 0.2222–0.6863), negative predictive value was 0.9147 (95% CI 0.8574–0.9589), and F1 score was 0.4457 (95% CI 0.2446–0.6114). Binary balanced accuracy was 0.6779 (95% CI 0.5776–0.7740), ROC-AUC was 0.7855 (95% CI 0.7060–0.8645), and PR-AUC was 0.4619 (95% CI 0.2500–0.6487).
+For malignant detection, sensitivity was 0.4333 with a 95% confidence interval of 0.2417 to 0.6136. Specificity was 0.9224 (95% CI 0.8788–0.9584), positive predictive value was 0.4588 (95% CI 0.2222–0.6863), negative predictive value was 0.9147 (95% CI 0.8574–0.9589), and F1 score was 0.4457 (95% CI 0.2446–0.6114). Binary balanced accuracy was 0.6779 (95% CI 0.5776–0.7740), ROC-AUC was 0.7855 (95% CI 0.7060–0.8645), and PR-AUC was 0.4619 (95% CI 0.2500–0.6487). Primary and secondary external performance estimates with patient-clustered 95% confidence intervals are summarized in Table 2.
 
 ## 3.5 Clean-input sensitivity analysis
 
@@ -189,7 +189,7 @@ The difference was more pronounced within malignant cases. For the 39 malignant 
 
 ## 3.7 Confidence-based abstention
 
-The prespecified threshold sweep demonstrated a trade-off between retained coverage and performance among accepted predictions.
+The prespecified threshold sweep demonstrated a trade-off between retained coverage and performance among accepted predictions. The complete prespecified threshold sweep is reported in Table 3.
 
 At a confidence threshold of 0.50, coverage was 0.9649 and accepted-case accuracy was 0.4613. Malignant sensitivity among accepted cases was 0.4333, with 51 accepted malignant false negatives.
 
@@ -209,7 +209,7 @@ The continuous risk-coverage analysis showed that predictions ranked by maximum-
 
 At approximately 25% coverage, 171 images were accepted and accuracy was 0.7135, corresponding to a selective risk of 0.2865. At approximately 50% coverage, 342 images were accepted and accuracy was 0.5380, with risk 0.4620. At approximately 75% coverage, 512 images were accepted and accuracy was 0.4883, with risk 0.5117. At full coverage, accuracy was 0.4583 and risk was 0.5417.
 
-The descriptive area under the empirical risk-coverage curve was 0.3831. The curve therefore showed that confidence ranking could identify a lower-risk subset, but meaningful reductions in accepted-case risk required substantial reductions in coverage.
+The descriptive area under the empirical risk-coverage curve was 0.3831. The curve therefore showed that confidence ranking could identify a lower-risk subset, but meaningful reductions in accepted-case risk required substantial reductions in coverage (Figure 6).
 
 ## 3.9 Calibration
 
@@ -219,11 +219,11 @@ Using 10 equal-width confidence bins, Expected Calibration Error was 0.3386. The
 
 The largest reliability gaps occurred in the high-confidence bins. For predictions with confidence between 0.80 and 0.90, mean confidence was 0.8531 while empirical accuracy was 0.3791. For predictions with confidence between 0.90 and 1.00, mean confidence was 0.9479 while empirical accuracy was 0.6121.
 
-These results indicate substantial overconfidence under external testing. Confidence could still rank predictions by relative reliability while remaining poorly calibrated in absolute terms.
+These results indicate substantial overconfidence under external testing. Confidence could still rank predictions by relative reliability while remaining poorly calibrated in absolute terms (Figure 5).
 
 ## 3.10 Failure analysis
 
-The malignant error audit reproduced the binary confusion counts of 39 true positives, 547 true negatives, 46 false positives, and 51 false negatives.
+The malignant error audit reproduced the binary confusion counts of 39 true positives, 547 true negatives, 46 false positives, and 51 false negatives. The principal malignant error patterns and high-confidence failures are summarized in Table 4.
 
 Among the 51 malignant false negatives, 48 (94.1%) were predicted as benign and 3 (5.9%) were predicted as normal. The principal malignant failure mode was therefore malignant-to-benign misclassification.
 
@@ -301,6 +301,97 @@ Independent external testing of a frozen public breast-ultrasound Vision Transfo
 Confidence-based abstention reduced error among accepted predictions, but the improvement required substantial loss of coverage and did not eliminate high-confidence malignant misses. Maximum-softmax confidence was also poorly calibrated with respect to top-class correctness on the external dataset.
 
 These findings support external, patient-aware evaluation that examines calibration, uncertainty, selective prediction, and failure patterns in addition to conventional discrimination metrics. For released medical-imaging AI systems, useful ranking performance should not be assumed to imply reliable categorical decisions or calibrated confidence under dataset shift. The present study should be interpreted as a reproducible external test of one public model on one independent cohort, rather than as clinical validation or a universal assessment of breast-ultrasound AI.
+# Tables
+
+## Table 1. Model and external test cohort characteristics
+
+| Characteristic | Value |
+|---|---|
+| Evaluated model | `Parveshiiii/breast-cancer-detector` |
+| Model revision | `7c4c1ac11f5f80d382cc641ec6f2d3989e7fa73c` |
+| Base architecture | Vision Transformer, ViT-B/16 |
+| Base checkpoint | `google/vit-base-patch16-224-in21k` |
+| Input size | 224 × 224 pixels |
+| Patch size | 16 × 16 pixels |
+| Output classes | Benign, malignant, normal |
+| Model adaptation on external data | None |
+| External dataset | BUS-UCLM |
+| External test images | 683 |
+| Patients | 38 |
+| Normal images | 419 |
+| Benign images | 174 |
+| Malignant images | 90 |
+| Ultrasound system | Siemens ACUSON S2000 |
+| Acquisition period | 2022–2023 |
+| Primary prediction unit | Image |
+| Primary outcome | Malignant sensitivity |
+| Bootstrap procedure | Patient-cluster bootstrap |
+| Bootstrap replicates | 5,000 |
+| Bootstrap random seed | 42 |
+| Clean-input sensitivity subset | 521 images |
+
+*Note:* Model weights, preprocessing, and class mapping were frozen before complete external inference. No BUS-UCLM image or label was used for retraining, fine-tuning, or recalibration.
+
+## Table 2. External performance on BUS-UCLM with patient-clustered 95% confidence intervals
+
+| Outcome | Estimate | 95% CI |
+|---|---:|---:|
+| **Three-class performance** |  |  |
+| Accuracy | 0.4583 | 0.3756–0.5347 |
+| Balanced accuracy | 0.5338 | 0.4564–0.6073 |
+| Macro F1 | 0.4544 | 0.3608–0.5346 |
+| **Malignant vs non-malignant performance** |  |  |
+| Sensitivity | 0.4333 | 0.2417–0.6136 |
+| Specificity | 0.9224 | 0.8788–0.9584 |
+| Positive predictive value | 0.4588 | 0.2222–0.6863 |
+| Negative predictive value | 0.9147 | 0.8574–0.9589 |
+| F1 score | 0.4457 | 0.2446–0.6114 |
+| Balanced accuracy | 0.6779 | 0.5776–0.7740 |
+| ROC-AUC | 0.7855 | 0.7060–0.8645 |
+| PR-AUC | 0.4619 | 0.2500–0.6487 |
+
+*Note:* Confidence intervals were obtained using 5,000 patient-cluster bootstrap replicates. ROC-AUC and PR-AUC used the malignant softmax score as the continuous decision variable.
+
+## Table 3. Prespecified confidence-based abstention threshold sweep
+
+| Threshold | Overall coverage | Malignant coverage | Malignant abstained, n | Accepted accuracy | Accepted malignant sensitivity* | Accepted specificity* | Accepted malignant FN | Accepted FP |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0.50 | 0.9649 | 1.0000 | 0 | 0.4613 | 0.4333 | 0.9262 | 51 | 42 |
+| 0.55 | 0.9151 | 0.9778 | 2 | 0.4592 | 0.4318 | 0.9311 | 50 | 37 |
+| 0.60 | 0.8624 | 0.9444 | 5 | 0.4652 | 0.4471 | 0.9325 | 47 | 34 |
+| 0.65 | 0.8053 | 0.9111 | 8 | 0.4691 | 0.4634 | 0.9316 | 44 | 32 |
+| 0.70 | 0.7189 | 0.8556 | 13 | 0.4949 | 0.4935 | 0.9348 | 39 | 27 |
+| 0.75 | 0.6486 | 0.8000 | 18 | 0.4989 | 0.4861 | 0.9326 | 37 | 25 |
+| 0.80 | 0.5637 | 0.6667 | 30 | 0.5195 | 0.5500 | 0.9354 | 27 | 21 |
+| 0.85 | 0.4553 | 0.6111 | 35 | 0.5434 | 0.5818 | 0.9297 | 23 | 18 |
+| 0.90 | 0.3397 | 0.4778 | 47 | 0.6121 | 0.6279 | 0.9365 | 16 | 12 |
+| 0.95 | 0.1742 | 0.1889 | 73 | 0.8403 | 0.7059 | 0.9608 | 5 | 4 |
+
+*Note:* Overall coverage is the proportion of all 683 external images receiving an accepted prediction. Malignant coverage is the proportion of the 90 malignant images receiving an accepted prediction. Metrics marked with an asterisk were calculated only among accepted cases. FN = false negative; FP = false positive. Abstained observations were reported separately and were not counted as correct predictions. The complete prespecified threshold sweep is shown rather than selecting a single threshold after observing external-test labels.
+
+## Table 4. Malignant and high-confidence error patterns during external testing
+
+| Failure characteristic | Count | Percentage |
+|---|---:|---:|
+| **Malignant false negatives** | **51** | **100.0%** |
+| Predicted benign | 48 | 94.1% |
+| Predicted normal | 3 | 5.9% |
+| FN confidence ≥ 0.80 | 27 | 52.9% |
+| FN confidence ≥ 0.90 | 16 | 31.4% |
+| FN confidence ≥ 0.95 | 5 | 9.8% |
+| Malignant FN patients | 14 | — |
+| FN from five highest-count patients | 29 | 56.9% |
+| **False-positive malignant predictions** | **46** | **100.0%** |
+| Reference normal | 30 | 65.2% |
+| Reference benign | 16 | 34.8% |
+| FP confidence ≥ 0.80 | 21 | 45.7% |
+| FP confidence ≥ 0.90 | 12 | 26.1% |
+| FP confidence ≥ 0.95 | 4 | 8.7% |
+| False-positive patients | 16 | — |
+| FP from five highest-count patients | 29 | 63.0% |
+
+*Note:* Confidence refers to maximum-softmax confidence for the model's predicted class. Percentages for confidence thresholds and prediction directions are relative to the corresponding false-negative or false-positive group. Patient concentration is descriptive and does not establish a causal failure mechanism.
+
 # Declarations
 
 ## Ethics and consent
